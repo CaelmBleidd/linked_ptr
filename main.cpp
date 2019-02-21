@@ -171,8 +171,8 @@ bool test_swap() {
     bool is_a_deleted = false;
     bool is_b_deleted = false;
 
-    is_deleted *a0 = new is_deleted(is_a_deleted);
-    is_deleted *b0 = new is_deleted(is_b_deleted);
+    auto *a0 = new is_deleted(is_a_deleted);
+    auto *b0 = new is_deleted(is_b_deleted);
 
     linked_ptr<is_deleted> a1(a0);
     linked_ptr<is_deleted> a2(a1);
@@ -237,3 +237,4 @@ int main() {
 
     return 0;
 }
+

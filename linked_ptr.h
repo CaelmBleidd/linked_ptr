@@ -10,10 +10,11 @@
 namespace smart_ptr {
     namespace details {
         struct node {
-            node(node *prev, node *next): next(next), prev(prev) {}
-            node(): next(nullptr), prev(nullptr) {}
+            node(node *prev, node *next) : next(next), prev(prev) {}
 
-            void insert(node *to_insert)  {
+            node() : next(nullptr), prev(nullptr) {}
+
+            void insert(node *to_insert) {
                 to_insert->prev = this;
                 to_insert->next = next;
                 if (next)
@@ -63,7 +64,8 @@ namespace smart_ptr {
     template<typename T>
     class linked_ptr {
         template<typename U>
-        friend class linked_ptr;
+        friend
+        class linked_ptr;
 
     public:
         constexpr linked_ptr() noexcept : node_in_list(), pointer(nullptr) {} // default
@@ -135,7 +137,7 @@ namespace smart_ptr {
             return get();
         }
 
-        T& operator*() const {
+        T &operator*() const {
             return *get();
         }
 
@@ -184,7 +186,7 @@ namespace smart_ptr {
             node_in_list.insert(&a.node_in_list);
         }
 
-        template<typename U, typename = std::enable_if<std::is_convertible_v<U*, T*>>>
+        template<typename U, typename = std::enable_if<std::is_convertible_v<U *, T *>>>
         void insert(linked_ptr<U> const &a) const noexcept {
             node_in_list.insert(&a.node_in_list);
         }
